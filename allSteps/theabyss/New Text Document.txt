@@ -1,0 +1,19 @@
+import pandas as pd
+
+# Load the dataset
+election_data = pd.read_csv('1976-2020-president.csv')
+
+# Filter for the 2020 election and specified candidates
+filtered_data = election_data[
+    (election_data['year'] == 2020) &
+    (election_data['candidate'].isin(['BIDEN, JOSEPH R. JR', 'TRUMP, DONALD J.']))
+]
+
+# Keep only the necessary columns
+simplified_data = filtered_data[['year', 'state', 'state_po', 'candidate', 'party_detailed', 'candidatevotes', 'totalvotes']]
+
+# Save the simplified data to a new CSV file
+output_path = '2020_presidential_results.csv'
+simplified_data.to_csv(output_path, index=False)
+
+print(f"Simplified election data saved to {output_path}")
